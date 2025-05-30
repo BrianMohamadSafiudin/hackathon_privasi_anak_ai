@@ -2,7 +2,7 @@
 
 Aplikasi chatbot interaktif yang membantu anak-anak dan orang tua belajar tentang keamanan digital dan privasi data dengan cara yang mudah dipahami dan menyenangkan. Chatbot ini memberikan jawaban edukatif berdasarkan pertanyaan pengguna, sehingga meningkatkan literasi digital anak dan memfasilitasi komunikasi mengenai topik keamanan online.
 
-![Screenshot](doc/demo.jpg)
+![Screenshot](doc/chatbot.jpg)
 
 ## Fitur Utama
 - Chatbot berbasis AI yang mampu menjawab pertanyaan seputar keamanan digital anak.
