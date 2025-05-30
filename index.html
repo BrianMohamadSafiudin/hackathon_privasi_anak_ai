@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Edukasi Anak</title>
+</head>
+<body>
+    <h1>Chatbot Edukasi Privasi Anak</h1>
+    <div id="chatbox" style="border:1px solid #ccc; padding:10px; height:300px; overflow-y:scroll;"></div>
+    <input type="text" id="userInput" placeholder="Ketik pesan..." style="width:80%;" />
+    <button onclick="sendMessage()">Kirim</button>
+
+    <script>
+        function addMessage(text, sender) {
+            const chatbox = document.getElementById('chatbox');
+            const msgDiv = document.createElement('div');
+            msgDiv.textContent = sender + ": " + text;
+            chatbox.appendChild(msgDiv);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value;
+            if (!message) return;
+            addMessage(message, "Kamu");
+            input.value = '';
+
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            addMessage(data.reply, "Bot");
+        }
+    </script>
+</body>
+</html>
