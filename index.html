@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Chatbot Edukasi Anak</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Edukasi Privasi Anak</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #chatbox { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
+        input[type="text"] { width: 70%; padding: 10px; }
+        button { padding: 10px; }
+    </style>
 </head>
 <body>
     <h1>Chatbot Edukasi Privasi Anak</h1>
-    <div id="chatbox" style="border:1px solid #ccc; padding:10px; height:300px; overflow-y:scroll;"></div>
-    <input type="text" id="userInput" placeholder="Ketik pesan..." style="width:80%;" />
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Ketik pesan..." />
     <button onclick="sendMessage()">Kirim</button>
 
     <script>
@@ -22,16 +30,24 @@
             const input = document.getElementById('userInput');
             const message = input.value;
             if (!message) return;
+
+            // Menampilkan pesan pengguna di chat
             addMessage(message, "Kamu");
             input.value = '';
 
-            const response = await fetch('/chat', {
+            // Mengirimkan request ke backend
+            const response = await fetch('http://127.0.0.1:5000/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message })
             });
+
             const data = await response.json();
             addMessage(data.reply, "Bot");
+
+            if (data.analysis.warning) {
+                addMessage("Peringatan: " + data.analysis.warning, "Bot");
+            }
         }
     </script>
 </body>
