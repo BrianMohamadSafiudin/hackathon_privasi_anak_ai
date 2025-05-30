@@ -1,2 +1,6 @@
 flask
 azure-ai-textanalytics
+spaCy
+vaderSentiment
+flask-cors
+en-core-web-sm
